@@ -37,11 +37,50 @@ npm install
 
 ## Usage
 
+### Basic Conversions
+
 ```bash
 npx convert temperature 100 C F
+npx convert temperature 273.15 K C  # Kelvin support
 npx convert distance 5 km mi
+npx convert distance 1000 m km      # Meters support
 npx convert weight 200 g oz
+npx convert weight 1 lb g           # Pounds support
 ```
+
+### Compare Values
+
+Compare two values with different units:
+
+```bash
+npx convert compare 5 km 3 mi
+# Output:
+# 5 km is greater than 3 mi
+#   5 km = 5000.00 m
+#   3 mi = 4828.03 m
+#   Difference: 171.97 m (3.56%)
+
+npx convert compare 100 C 212 F
+# Output:
+# 100 C is equal to 212 F
+#   100 C = 100.00 C
+#   212 F = 100.00 C
+#   Difference: 0.00 C (0.00%)
+
+npx convert compare 1000 g 2 lb
+# Output:
+# 1000 g is greater than 2 lb
+#   1000 g = 1000.00 g
+#   2 lb = 907.18 g
+#   Difference: 92.82 g (10.23%)
+```
+
+The compare command automatically:
+- Detects the unit type (temperature, distance, or weight)
+- Converts both values to a common base unit
+- Shows which value is greater, less than, or equal
+- Displays the difference in absolute and percentage terms
+- Validates that both units are of the same type
 
 ## Run tests
 
@@ -81,13 +120,13 @@ Ask Claude to add input validation that rejects non-numeric values and unknown u
 
 For larger features, turn on **Plan Mode** before prompting:
 
-1. Press `Shift+Tab` to enter plan mode, then ask Claude to extend the converter with new units:
+1. The converter now supports extended units:
 
-- Kelvin for temperature
-- meters for distance
-- pounds for weight
+- Temperature: Celsius (C), Fahrenheit (F), Kelvin (K)
+- Distance: kilometers (km), miles (mi), meters (m)
+- Weight: grams (g), ounces (oz), pounds (lb)
 
-  For example, users should be able to run "convert temperature 273 K C" or "convert distance 1000 m km".
+  For example: "convert temperature 273.15 K C" or "convert distance 1000 m km" or "convert weight 1 lb oz".
 
 2. Claude will generate a step-by-step plan. Review and adjust the steps as needed using `Ctrl-g`.
 

@@ -11,3 +11,29 @@ test("converts Fahrenheit to Celsius", () => {
   strictEqual(convertTemperature(32, "F", "C"), 0);
   strictEqual(convertTemperature(212, "F", "C"), 100);
 });
+
+test("converts Celsius to Kelvin", () => {
+  strictEqual(convertTemperature(0, "C", "K"), 273.15);
+  strictEqual(convertTemperature(100, "C", "K"), 373.15);
+});
+
+test("converts Kelvin to Celsius", () => {
+  strictEqual(convertTemperature(273.15, "K", "C"), 0);
+  strictEqual(convertTemperature(373.15, "K", "C"), 100);
+});
+
+test("converts Fahrenheit to Kelvin", () => {
+  strictEqual(convertTemperature(32, "F", "K"), 273.15);
+  strictEqual(convertTemperature(212, "F", "K"), 373.15);
+});
+
+test("converts Kelvin to Fahrenheit", () => {
+  strictEqual(convertTemperature(273.15, "K", "F"), 32);
+  strictEqual(convertTemperature(373.15, "K", "F"), 212);
+});
+
+test("handles same-unit temperature conversions", () => {
+  strictEqual(convertTemperature(100, "C", "C"), 100);
+  strictEqual(convertTemperature(100, "F", "F"), 100);
+  strictEqual(convertTemperature(100, "K", "K"), 100);
+});
